@@ -5,6 +5,7 @@ import { Container } from '@chakra-ui/react'
 import Header from '../components/Header'
 import Gallery from '../components/Gallery'
 import About from '../components/About'
+import Footer from '../components/Footer'
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
           <Header />
           <Gallery />
           <About />
+          <Footer />
         </Container>
       </main>
     </>
