@@ -4,6 +4,7 @@ import { Container } from '@chakra-ui/react'
 
 import Header from '../components/Header'
 import Gallery from '../components/Gallery'
+import About from '../components/About'
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         <Container maxW={'7xl'}>
           <Header />
           <Gallery />
+          <About />
         </Container>
       </main>
     </>

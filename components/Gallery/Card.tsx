@@ -34,6 +34,7 @@ const Card: NextComponentType<NextPageContext, {}, CardProps> = ({
           fontSize="2xl"
           color="white"
           fontWeight="bold"
+          fontFamily="Be Vietnam Pro"
         >
           {lable}
         </Text>
