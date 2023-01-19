@@ -4,7 +4,14 @@ import { Stack, Heading } from '@chakra-ui/react'
 
 const Header: NextComponentType = () => {
   return (
-    <Stack height="40vh" justify="center" p="1rem 20rem">
+    <Stack
+      height="40vh"
+      justify="center"
+      p={{
+        base: '1rem',
+        lg: '1rem 20rem',
+      }}
+    >
       <Heading
         as="h4"
         size="md"

@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Container } from '@chakra-ui/react'
 
 import Header from '../components/Header'
+import Gallery from '../components/Gallery'
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <main>
         <Container maxW={'7xl'}>
           <Header />
+          <Gallery />
         </Container>
       </main>
     </>
