@@ -6,6 +6,8 @@ import Header from '../components/Header'
 import Gallery from '../components/Gallery'
 import About from '../components/About'
 import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import SocialMedia from '../components/SocialMedia'
 
 const Home = () => {
   return (
@@ -21,6 +23,8 @@ const Home = () => {
           <Header />
           <Gallery />
           <About />
+          <Navbar />
+          <SocialMedia />
           <Footer />
         </Container>
       </main>
