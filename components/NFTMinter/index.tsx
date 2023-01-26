@@ -8,14 +8,17 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
+  FormHelperText,
   FormLabel,
   Heading,
   Input,
   Textarea,
+  Text,
   Icon,
   Stack,
 } from '@chakra-ui/react'
 import { FiFile } from 'react-icons/fi'
+import swal from 'sweetalert'
 
 import FileUploader from '../FileUploader'
 
@@ -35,7 +38,7 @@ interface FormValues {
 
 const NFTMinter: NextComponentType = () => {
   const { uploadToIpfs, isLoading, error, fileHash } = useIpfsFileUploader()
-  const { connectNami, wallet } = useWalletConnector()
+  const { connectNami, wallet, connecting } = useWalletConnector()
   const {
     register,
     handleSubmit,
@@ -47,6 +50,7 @@ const NFTMinter: NextComponentType = () => {
 
   const handlePolicyAndKey = () => {
     const result = generatePolicyScriptAndKey()
+    swal('Info', 'Please save this private key', 'info')
     setValue('private_key', result)
   }
 
@@ -85,7 +89,7 @@ const NFTMinter: NextComponentType = () => {
       alert(error)
     }
     if (fileHash) {
-      alert('File uploaded')
+      swal('Congratulations', 'Your file is uploaded to IPFS.', 'success')
       console.log(fileHash)
     }
   }, [error, fileHash])
@@ -103,7 +107,9 @@ const NFTMinter: NextComponentType = () => {
         <Heading fontSize={'2xl'}>Mint NFT 🖼️</Heading>
 
         {!wallet ? (
-          <Button onClick={connectNami}>Connect Nami</Button>
+          <Button onClick={connectNami} isLoading={connecting}>
+            Connect Nami
+          </Button>
         ) : (
           <>
             <FormControl id="nft-name" isInvalid={errors.name ? true : false}>
@@ -114,6 +120,7 @@ const NFTMinter: NextComponentType = () => {
                 {...register('name', {
                   required: 'Please give your NFT a name...',
                 })}
+                isDisabled={isLoading}
               />
               <FormErrorMessage>
                 {errors.name && errors.name.message}
@@ -132,12 +139,19 @@ const NFTMinter: NextComponentType = () => {
                   required: 'Please generate key...',
                 })}
               />
+              <FormHelperText>
+                Please copy & save this private key
+              </FormHelperText>
               <FormErrorMessage>
                 {errors.private_key && errors.private_key.message}
               </FormErrorMessage>
             </FormControl>
 
-            <FormControl isInvalid={!!errors.file} isRequired>
+            <FormControl
+              isInvalid={!!errors.file}
+              isRequired
+              isDisabled={isLoading}
+            >
               <FormLabel>Attachment</FormLabel>
 
               <FileUploader
@@ -147,7 +161,8 @@ const NFTMinter: NextComponentType = () => {
                   required: 'Please upload a file...',
                 })}
               >
-                <Button leftIcon={<Icon as={FiFile} />}>Upload</Button>
+                <Button leftIcon={<Icon as={FiFile} />}>Select file</Button>
+                <Text m="2">{watch('file') && watch('file')[0]?.name}</Text>
               </FileUploader>
 
               <FormErrorMessage>
@@ -169,14 +184,14 @@ const NFTMinter: NextComponentType = () => {
                     </Button>
                   ) : (
                     <Button
-                      colorScheme="purple"
+                      colorScheme="gray"
                       variant="solid"
                       w="100%"
                       isLoading={isLoading}
                       type="button"
                       onClick={handleUploadFile}
                     >
-                      Upload File
+                      Upload File 👆
                     </Button>
                   )}
                 </>

@@ -1,11 +1,14 @@
 import type { NextComponentType, NextPageContext } from 'next'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Box, Text, Image } from '@chakra-ui/react'
 
 interface CardProps {
   imageURL: string
   lable: string
 }
+
+const MotionBox = motion(Box)
 
 const Card: NextComponentType<NextPageContext, {}, CardProps> = ({
   imageURL,
@@ -14,10 +17,12 @@ const Card: NextComponentType<NextPageContext, {}, CardProps> = ({
   const [isHover, setIsHover] = useState<boolean>(false)
 
   return (
-    <Box
+    <MotionBox
       position="relative"
       onMouseOver={() => setIsHover(true)}
       onMouseOut={() => setIsHover(false)}
+      display="none"
+      animate={{ y: -50, display: 'block' }}
     >
       <Image
         src={imageURL}
@@ -39,7 +44,7 @@ const Card: NextComponentType<NextPageContext, {}, CardProps> = ({
           {lable}
         </Text>
       )}
-    </Box>
+    </MotionBox>
   )
 }
 

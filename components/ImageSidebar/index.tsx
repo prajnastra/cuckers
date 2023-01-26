@@ -12,8 +12,14 @@ const ImageSidebar: NextComponentType<
   ImageSlidebarProps
 > = ({ url }) => {
   return (
-    <Flex flex={1}>
-      <Image alt="Cuckers banner" objectFit="cover" src={url} />
+    <Flex flex={1} pos="relative">
+      <Image
+        alt="Cuckers banner"
+        objectFit="cover"
+        src={url}
+        pos="absolute"
+        bottom={0}
+      />
     </Flex>
   )
 }

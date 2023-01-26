@@ -6,6 +6,7 @@ import {
   WalletApi,
   Assets,
 } from 'lucid-cardano'
+import swal from 'sweetalert'
 
 import {
   NftPolicy,
@@ -14,6 +15,7 @@ import {
 } from '../nft-toolkit/nft-policy'
 import { RebateCalculator } from '../nft-toolkit/rebate-calculator'
 import { validate, validated } from '../nft-toolkit/utils'
+
 import {
   getBlockfrostParams,
   getLucidInstance,
@@ -203,6 +205,7 @@ export async function performMintTxn(
     // alert here
     console.log(`Successfully sent minting tx: ${txSubmit}!`)
 
+    swal('Transaction submitted', txSubmit, 'success')
     // if (update) {
     //   longToast(
     //     'Will ask you to burn the NFT when mint is complete, please wait...'
