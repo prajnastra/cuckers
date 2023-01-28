@@ -1,8 +1,18 @@
 import type { NextComponentType } from 'next'
 
+import { useState } from 'react'
 import { Stack, Heading } from '@chakra-ui/react'
+import { AnimatePresence, motion } from 'framer-motion'
+
+const MotionHeading = motion(Heading)
 
 const Header: NextComponentType = () => {
+  const [showTitle, setShowTitle] = useState<boolean>(false)
+
+  setTimeout(() => {
+    setShowTitle(true)
+  }, 4000)
+
   return (
     <Stack
       height="40vh"
@@ -12,16 +22,21 @@ const Header: NextComponentType = () => {
         lg: '1rem 20rem',
       }}
     >
-      <Heading
-        as="h4"
-        size="md"
-        textAlign="center"
-        fontFamily="Be Vietnam Pro"
-        opacity="0.3"
-        fontWeight="600"
-      >
-        Meet The Cuckers
-      </Heading>
+      <AnimatePresence>
+        {showTitle && (
+          <MotionHeading
+            as="h4"
+            size="md"
+            textAlign="center"
+            fontFamily="Be Vietnam Pro"
+            opacity="0.3"
+            fontWeight="600"
+          >
+            Meet The Cuckers
+          </MotionHeading>
+        )}
+      </AnimatePresence>
+
       <Heading
         as="h2"
         size="lg"

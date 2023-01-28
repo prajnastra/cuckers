@@ -17,24 +17,6 @@ export function getLucidInstance(blockfrostKey: string) {
   )
 }
 
-// remove this after integrating mesh
-export function getNetworkId() {
-  var cardanoDApp = CardanoDAppJs.getCardanoDAppInstance()
-  if (!cardanoDApp.isWalletConnected()) {
-    return undefined
-  }
-  return cardanoDApp.getConnectedWallet().then((wallet: any) => {
-    return wallet.getNetworkId().then((networkId: any) => {
-      if (networkId != MAINNET_ID && networkId != TESTNET_ID) {
-        // add swal alert
-        console.log(`Invalid networkId ${networkId} detected`)
-        return
-      }
-      return networkId
-    })
-  })
-}
-
 export function getBlockfrostParams(blockfrostKey: string): {
   api: string
   network: Network
